@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +28,7 @@
 </style>
 </head>
 <body>
-<select id="lang-select" onchange="translate()">
+<select id="lang-select" onchange="changeLanguage()">
   <option value="">🌐 Select language</option>
   <option value="pap">Papiamento</option>
   <option value="nl">Nederlands</option>
@@ -42,7 +41,7 @@
 </select>
 
 <script>
-  function translate() {
+  function changeLanguage() {
     var lang = document.getElementById('lang-select').value;
     if (!lang) return;
 
@@ -53,7 +52,7 @@
       pageUrl = window.parent.location.href;
     } catch(e) {
       // Cross-origin fallback: set your site's base URL here
-      pageUrl = 'https://www--testopia--com.wl.deedmob.com/';
+      pageUrl = 'https://yourwebsite.com';
     }
 
     // Open Google Translate proxy for the parent page
@@ -66,8 +65,5 @@
     window.parent.location.href = translateUrl;
   }
 </script>
-
-<p style="color:black;padding:1rem;">Test: select a language above</p>
- 
 </body>
 </html>
