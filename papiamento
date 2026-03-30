@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: transparent;
+    font-family: sans-serif;
+    font-size: .85rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    height: 100%;
+    padding: 0 .5rem;
+  }
+  select {
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 6px;
+    padding: .3rem .5rem;
+    font-size: .85rem;
+    cursor: pointer;
+  }
+  select option { background: #1a1a2e; color: #fff; }
+</style>
+</head>
+<body>
+<select id="lang-select" onchange="translate()">
+  <option value="">Select language</option>
+  <option value="pap">Papiamento</option>
+  <option value="nl">Nederlands</option>
+  <option value="en">English</option>
+  <option value="es">Español</option>
+  <option value="pt">Português</option>
+  <option value="fr">Français</option>
+  <option value="de">Deutsch</option>
+  <option value="ar">العربية</option>
+</select>
+
+<script>
+  function translate() {
+    var lang = document.getElementById('lang-select').value;
+    if (!lang) return;
+
+    // Get the URL of the parent page (works if same origin,
+    // or falls back to a configurable default)
+    var pageUrl;
+    try {
+      pageUrl = window.parent.location.href;
+    } catch(e) {
+      // Cross-origin fallback: set your site's base URL here
+      pageUrl = 'https://yourwebsite.com';
+    }
+
+    // Open Google Translate proxy for the parent page
+    var translateUrl = 'https://translate.google.com/translate'
+      + '?hl=' + lang
+      + '&sl=auto'
+      + '&tl=' + lang
+      + '&u=' + encodeURIComponent(pageUrl);
+
+    window.parent.location.href = translateUrl;
+  }
+</script>
+</body>
+</html>
